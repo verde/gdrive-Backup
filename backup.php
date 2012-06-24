@@ -807,8 +807,10 @@ class Backup {
         $initial_memory = memory_get_usage(true);
         // We might need a lot of memory for this
         @ini_set('memory_limit', apply_filters('admin_memory_limit', WP_MAX_MEMORY_LIMIT));
+// add domain name and turn time into readable date, but leave time do create unique file
+				$readabletime = utf8_encode(strftime("%Y-%m-%d",  $this->time ));
+        $file_name = $_SERVER['SERVER_NAME'] .'-'. $readabletime . '-' . $this->time . '.zip';
 
-        $file_name = $this->time . '.zip';
         $file_path = $this->local_folder . '/' . $file_name;
         
         // Create database dump sql file.
